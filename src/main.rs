@@ -12,7 +12,7 @@ use data_structures::mapas::TablaSimbolos;
 use helpers::logger::{log, LogLevel};
 
 fn main() {
-    log(LogLevel::Info, "=== INICIANDO MAIN DE PRUEBA (LIBRERÍA DE SOPORTE) ===");
+    log(LogLevel::Info, "=== INICIANDO ===");
 
     // 1. Probando el ÁRBOL (Usa Enums y Smart Pointers 'Box')
     log(LogLevel::Info, "1. Probando Árbol (AST)...");
@@ -23,7 +23,7 @@ fn main() {
     };
     print!("   Resultado Printable: ");
     ast.print_info(); 
-    println!("\n"); // Saltos de línea para que se vea ordenado
+    println!("\n");
 
     // 2. Probando la COLA
     log(LogLevel::Info, "2. Probando Cola...");
@@ -54,5 +54,5 @@ fn main() {
     tabla.print_info();
     println!();
 
-    log(LogLevel::Info, "=== TODAS LAS ESTRUCTURAS FUNCIONAN CORRECTAMENTE ===");
+    log(LogLevel::Info, "=== TERMINANDO PRUEBA ===");
 }
