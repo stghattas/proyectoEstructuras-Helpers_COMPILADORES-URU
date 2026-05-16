@@ -17,5 +17,5 @@ pub fn log(nivel: LogLevel, mensaje: &str) {
 
     println!("{}", mensaje_formateado);
 
-    let _ = añadir_linea("registro_logs.txt", &mensaje_formateado);
+    let _ = añadir_linea("src/logs/registro_logs.txt", &mensaje_formateado);
 }
