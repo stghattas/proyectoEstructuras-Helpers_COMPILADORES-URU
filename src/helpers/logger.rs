@@ -1,5 +1,5 @@
-use std::time::{SystemTime, UNIX_EPOCH};
 use crate::helpers::file_io::añadir_linea;
+use chrono::Local;
 
 pub enum LogLevel { Info, Warning, Error }
 
@@ -10,10 +10,9 @@ pub fn log(nivel: LogLevel, mensaje: &str) {
         LogLevel::Error => "[ERROR]",
     };
 
-    // Obtenemos los segundos actuales para generar un Timestamp
-    let tiempo_actual = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
+    let fecha_hora_legible = Local::now().format("%Y-%m-%d %H:%M:%S").to_string();
 
-    let mensaje_formateado = format!("(Time: {}) {} {}", tiempo_actual, prefijo, mensaje);
+    let mensaje_formateado = format!("[{}] {} {}", fecha_hora_legible, prefijo, mensaje);
 
     println!("{}", mensaje_formateado);
 
