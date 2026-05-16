@@ -1,32 +1,41 @@
-use std::collections::HashMap;
 use crate::traits::Printable;
 
-pub struct TablaSimbolos {
-    tabla: HashMap<String, String>,
+pub struct Mapa<K, V> {
+    entradas: Vec<(K, V)>,
 }
 
-impl TablaSimbolos {
+impl<K: PartialEq, V: Clone> Mapa<K, V> {
     pub fn new() -> Self {
-        Self {
-            tabla: HashMap::new(),
+        Self { entradas: Vec::new() }
+    }
+
+    pub fn insertar(&mut self, clave: K, valor: V) {
+        // Si la clave ya existe, actualiza su valor
+        for entrada in &mut self.entradas {
+            if entrada.0 == clave {
+                entrada.1 = valor;
+                return;
+            }
         }
+        // Si no existe, la agrega
+        self.entradas.push((clave, valor));
     }
 
-    pub fn insertar(&mut self, id: String, tipo: String) {
-        self.tabla.insert(id, tipo);
-    }
-
-    pub fn buscar(&self, id: &str) -> Option<&String> {
-        self.tabla.get(id)
+    pub fn buscar(&self, clave: &K) -> Option<&V> {
+        for entrada in &self.entradas {
+            if &entrada.0 == clave {
+                return Some(&entrada.1);
+            }
+        }
+        None
     }
 }
 
-impl Printable for TablaSimbolos {
+impl<K: std::fmt::Debug, V: std::fmt::Debug> Printable for Mapa<K, V> {
     fn print_info(&self) {
-        println!("--- Tabla de Símbolos ---");
-        for (clave, valor) in &self.tabla {
-            println!("  Variable: {}, Tipo: {}", clave, valor);
+        println!("Mapa:");
+        for (clave, valor) in &self.entradas {
+            println!("  [{:?}] -> {:?}", clave, valor);
         }
-        println!("-------------------------");
     }
 }
